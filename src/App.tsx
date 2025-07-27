@@ -1,7 +1,11 @@
+import MainView from "./components/MainView"
+
 const App = () => {
   return (
-    <main>
-      <h1 className="text-3xl">Welcome to Chatbot Flow</h1>
+    <main className="flex h-screen">
+      <section className="flex h-full flex-1">
+        <MainView />
+      </section>
     </main>
   )
 }
