@@ -16,9 +16,11 @@ const nodes: NodeMetadata[] = [
 const NodesPanel = ({
   node,
   dispatchNodes,
+  deleteNode,
 }: {
   node: FlowNode | undefined;
   dispatchNodes: React.ActionDispatch<[action: NodeAction]>;
+  deleteNode: (nodeId: string) => void;
 }) => {
   function dragstartHandler(ev: DragEvent) {
     ev.dataTransfer.setData("text", (ev.target as HTMLElement).id);
@@ -85,9 +87,7 @@ const NodesPanel = ({
       {node?.id && (
         <button
           className="mt-4 px-4 py-2 bg-red-500 text-white rounded cursor-pointer"
-          onClick={() =>
-            dispatchNodes({ type: "DELETE_NODE", nodeId: node.id })
-          }
+          onClick={() => deleteNode(node.id)}
         >
           Remove Node
         </button>

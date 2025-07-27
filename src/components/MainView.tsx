@@ -70,6 +70,21 @@ const MainView = () => {
     }
   };
 
+  const handleDeleteNode = useCallback(
+    (nodeId: string) => {
+      // Remove the node
+      dispatchNodes({ type: "DELETE_NODE", nodeId });
+
+      // Remove edges connected to the deleted node
+      setEdges((edgesSnapshot) =>
+        edgesSnapshot.filter(
+          (edge) => edge.source !== nodeId && edge.target !== nodeId
+        )
+      );
+    },
+    [dispatchNodes, setEdges]
+  );
+
   return (
     <main className="bg-gray-100 w-full">
       <section className="flex justify-end w-full p-3 bg-gray-300">
@@ -104,6 +119,7 @@ const MainView = () => {
         <NodesPanel
           node={nodes.find((node) => node.selected)}
           dispatchNodes={dispatchNodes}
+          deleteNode={handleDeleteNode}
         />
       </section>
     </main>

@@ -13,7 +13,7 @@ export type NodeAction =
 export function nodeReducer(state: FlowNode[], action: NodeAction): FlowNode[] {
   switch (action.type) {
     case "ADD_NODE": {
-      const nextId = `${action.nodeKind}_${state.length + 1}`;
+      const nextId = crypto.randomUUID();
       return [
         ...state,
         {
